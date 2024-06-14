@@ -1,4 +1,4 @@
-// ignore_for_file: sort_child_properties_last, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print, use_key_in_widget_constructors
+// ignore_for_file: sort_child_properties_last, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print, use_key_in_widget_constructors, use_build_context_synchronously, unnecessary_new
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -109,7 +109,7 @@ class DashboardState extends State<Dashboard> {
     return WillPopScope(
       onWillPop: () {
         timer?.cancel();
-        Navigator.pop(context);
+        // Navigator.pop(context);
         return Future.value(false);
       },
       child: Scaffold(
@@ -292,13 +292,19 @@ class DashboardState extends State<Dashboard> {
             //       ]
             //     )
             //   ),
-              myCard("Metana (CH₄)", Metana.toString() + ' ppm',
+              myCard2("Metana (CH₄)", 'Metana adalah hidrokarbon paling sederhana yang berbentuk gas dengan rumus kimia CH4. Metana murni tidak berbau, tetapi jika digunakan untuk keperluan komersial, biasanya ditambahkan sedikit bau belerang untuk mendeteksi kebocoran yang mungkin terjadi',
                   Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
-              myCard("Carbon Monoxide (CO)", CO.toString() + ' ppm',
+              myCard("Sensor Metana (CH₄)", Metana.toString() + ' ppm',
+                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
+              myCard2("Carbon Monoxide (CO)", 'Karbon monoksida, rumus kimia CO, adalah gas yang tak berwarna, tak berbau, dan tak berasa. Ia terdiri dari satu atom karbon yang secara kovalen berikatan dengan satu atom oksigen. Dalam ikatan ini, terdapat dua ikatan kovalen dan satu ikatan kovalen koordinasi antara atom karbon dan oksigen.',
+                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
+              myCard("Sensor Carbon Monoxide (CO)", CO.toString() + ' ppm',
                   Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
             ],
             staggeredTiles: [
+              StaggeredTile.extent(2, 180.0),
               StaggeredTile.extent(2, 110.0),
+              StaggeredTile.extent(2, 200.0),
               StaggeredTile.extent(2, 110.0),
             ],
           )),
@@ -332,7 +338,7 @@ class DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(title, style: TextStyle(color: Colors.blueAccent)),
+                Text(title, style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.w600)),
                   Text(value,
                       style: TextStyle(
                           color: Colors.black,
@@ -349,6 +355,59 @@ class DashboardState extends State<Dashboard> {
                     child: icon,
                   )))
             ]),
+      ),
+    );
+  }
+  Widget myCard2(String title, String value, Widget icon) {
+    return _buildTile(
+      Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: 
+         Expanded(
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(title, style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.w600)),
+                Container(
+                  margin: const EdgeInsets.only(top: 5.0),
+                  child: new Text(value),
+                ),
+              ],
+            ),
+         )
+        
+        
+        
+        
+        
+        
+        
+        
+        // Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: <Widget>[
+        //       Column(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: <Widget>[
+        //           Text(title, style: TextStyle(color: Colors.blueAccent)),
+        //           Text(value,
+        //               style: TextStyle(
+        //                   color: Colors.black,
+        //                   // fontWeight: FontWeight.w500,
+        //                   fontSize: 14.0))
+        //         ],
+        //       ),
+        //       Material(
+        //           color: Colors.blue,
+        //           borderRadius: BorderRadius.circular(24.0),
+        //           child: Center(
+        //               child: Padding(
+        //             padding: const EdgeInsets.all(16.0),
+        //             child: icon,
+        //           )))
+        //     ]),
       ),
     );
   }
