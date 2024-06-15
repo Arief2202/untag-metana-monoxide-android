@@ -270,41 +270,65 @@ class DashboardState extends State<Dashboard> {
             mainAxisSpacing: 12.0,
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             children: <Widget>[
-            // Container(
-            //   padding: EdgeInsets.all(5),
-            //   child: 
-            //     Row(
-            //       children: [
-            //         Container(
-            //           padding: EdgeInsets.all(5),
-            //           child: TextField(
-            //                   decoration: InputDecoration(
-            //                     border: OutlineInputBorder(),
-            //                     labelText: 'IP Endpoint',
-            //                     labelStyle: TextStyle(fontSize: 20),
-            //                   ),
-            //                   controller: _data[0],
-            //                 )),
-            //         Container(
-            //           padding: EdgeInsets.all(5),
-            //           child: ElevatedButton(onPressed: (){}, child: Text("Save"))
-            //         ),
-            //       ]
-            //     )
-            //   ),
-              myCard2("Metana (CH₄)", 'Metana adalah hidrokarbon paling sederhana yang berbentuk gas dengan rumus kimia CH4. Metana murni tidak berbau, tetapi jika digunakan untuk keperluan komersial, biasanya ditambahkan sedikit bau belerang untuk mendeteksi kebocoran yang mungkin terjadi',
-                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
-              myCard("Sensor Metana (CH₄)", Metana.toString() + ' ppm',
-                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
-              myCard2("Carbon Monoxide (CO)", 'Karbon monoksida, rumus kimia CO, adalah gas yang tak berwarna, tak berbau, dan tak berasa. Ia terdiri dari satu atom karbon yang secara kovalen berikatan dengan satu atom oksigen. Dalam ikatan ini, terdapat dua ikatan kovalen dan satu ikatan kovalen koordinasi antara atom karbon dan oksigen.',
-                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
-              myCard("Sensor Carbon Monoxide (CO)", CO.toString() + ' ppm',
-                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0)),
+              myCard("Metana (CH₄)", Metana.toString() + ' ppm',
+                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0),
+                  onTap: (){
+                    Alert(
+                      context: context,
+                      type: AlertType.info,
+                      title: "Metana (CH₄)",
+                      desc: "Metana adalah hidrokarbon paling sederhana yang berbentuk gas dengan rumus kimia CH4. Metana murni tidak berbau, tetapi jika digunakan untuk keperluan komersial, biasanya ditambahkan sedikit bau belerang untuk mendeteksi kebocoran yang mungkin terjadi",
+                      style: AlertStyle(
+                        descStyle: TextStyle(
+                          fontSize: 16,
+                        ),
+                        descTextAlign: TextAlign.start
+                      ),
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                          onPressed: () =>
+                              Navigator.pop(context),
+                        )
+                      ],
+                    ).show();
+                  }),
+              myCard("Carbon Monoxide (CO)", CO.toString() + ' ppm',
+                  Icon(Icons.gas_meter, color: Colors.white, size: 30.0),
+                  onTap: (){
+                    Alert(
+                      context: context,
+                      type: AlertType.info,
+                      title: "Carbon Monoxide (CO)",
+                      desc: "Karbon monoksida, rumus kimia CO, adalah gas yang tak berwarna, tak berbau, dan tak berasa. Ia terdiri dari satu atom karbon yang secara kovalen berikatan dengan satu atom oksigen. Dalam ikatan ini, terdapat dua ikatan kovalen dan satu ikatan kovalen koordinasi antara atom karbon dan oksigen.",
+                      style: AlertStyle(
+                        descStyle: TextStyle(
+                          fontSize: 16,
+                        ),
+                        descTextAlign: TextAlign.start
+                      ),
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                          onPressed: () =>
+                              Navigator.pop(context),
+                        )
+                      ],
+                    ).show();
+                  }),
             ],
             staggeredTiles: [
-              StaggeredTile.extent(2, 180.0),
               StaggeredTile.extent(2, 110.0),
-              StaggeredTile.extent(2, 200.0),
               StaggeredTile.extent(2, 110.0),
             ],
           )),
@@ -326,7 +350,7 @@ class DashboardState extends State<Dashboard> {
             child: child));
   }
 
-  Widget myCard(String title, String value, Widget icon) {
+  Widget myCard(String title, String value, Widget icon, {Function()? onTap}) {
     return _buildTile(
       Padding(
         padding: const EdgeInsets.all(24.0),
@@ -356,6 +380,7 @@ class DashboardState extends State<Dashboard> {
                   )))
             ]),
       ),
+      onTap: onTap,
     );
   }
   Widget myCard2(String title, String value, Widget icon) {
@@ -375,39 +400,6 @@ class DashboardState extends State<Dashboard> {
               ],
             ),
          )
-        
-        
-        
-        
-        
-        
-        
-        
-        // Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     children: <Widget>[
-        //       Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: <Widget>[
-        //           Text(title, style: TextStyle(color: Colors.blueAccent)),
-        //           Text(value,
-        //               style: TextStyle(
-        //                   color: Colors.black,
-        //                   // fontWeight: FontWeight.w500,
-        //                   fontSize: 14.0))
-        //         ],
-        //       ),
-        //       Material(
-        //           color: Colors.blue,
-        //           borderRadius: BorderRadius.circular(24.0),
-        //           child: Center(
-        //               child: Padding(
-        //             padding: const EdgeInsets.all(16.0),
-        //             child: icon,
-        //           )))
-        //     ]),
       ),
     );
   }
